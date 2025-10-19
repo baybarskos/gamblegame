@@ -6,7 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileInputStream;
-
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 public class gamblegame {
 	public static void main(String[] args) throws IOException {
 		int playerHealth = 50;
@@ -22,6 +23,7 @@ public class gamblegame {
 		int maks1 = 0;
 		int maks2 = 0;
 		do {
+			playerHealth=50;
 			System.out.println("1. The Game");
 			System.out.println("2. Statistics");
 			System.out.println("3. Exit");
@@ -42,15 +44,15 @@ public class gamblegame {
 							int gec1=maks1;
 							maks1=gec;
 							maks2=gec1;
-						} else if(num>maks1){
+						} else if(num>maks1&&num<maks){
 							int gec=maks1;
 							num=maks1;
 							maks2=gec;
-						}else if(num>maks2) {
+						}else if(num>maks2&&num<maks&&num<maks1) {
 							num=maks2;
 						}
 					}
-					System.out.println("maksimum score is: " + maks+"\nsecond maksimum score is:"+maks1+"\nthird maksimum score is: "+maks2);
+					System.out.println("maximum score is: " + maks+"\nsecond maximum score is:"+maks1+"\nthird maximum score is: "+maks2);
 				} catch (IOException e) {
 					myObj.createNewFile();
 					System.out.println("File not found. " + e);
@@ -215,8 +217,9 @@ public class gamblegame {
 					else {
 						System.out.println("Well, your choice.");}
 				}
+				LocalDateTime time=LocalDateTime.now();
 				try (FileWriter writer = new FileWriter("Score.txt", true)) {
-					writer.write(playerHealth + " is your escape health!\n");
+					writer.write(playerHealth + " is your escape health! You escaped at "+time+"\n");
 				} catch (IOException e) {
 					e.printStackTrace();
 					break;
