@@ -7,52 +7,56 @@ import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
+
 public class gamblegame {
 	public static void main(String[] args) throws IOException {
 		int playerHealth = 50;
 		Scanner input = new Scanner(System.in);
-		Random random = new Random();
-		int a1 = random.nextInt(5, 26);
-		int a2 = random.nextInt(10, 31);
-		int a3 = random.nextInt(0, 21);
-		int a4 = random.nextInt(15, 36);
 		String replay = "yes";
 		File myObj = new File("Score.txt");
 		int maks = 0;
 		int maks1 = 0;
 		int maks2 = 0;
-		int min=0;
-		int count=0;
+		int min = 0;
+		int count = 0;
+		String gamtedbear = "false";
+		String gamtedb = "";
 		try {
 			Scanner file = new Scanner(new FileInputStream(myObj));
 			while (file.hasNextLine()) {
 				int num = file.nextInt();
 				String trash = file.nextLine();
-				if(num<min) {
-					min=num;
-				}else {
+				gamtedb = file.nextLine();
+				if (num < min) {
+					min = num;
+				} else {
 				}
 				if (num > maks) {
-					int gec=maks;
+					int gec = maks;
 					maks = num;
-					int gec1=maks1;
-					maks1=gec;
-					maks2=gec1;
-				} else if(num>maks1&&num<maks){
-					int gec=maks1;
-					num=maks1;
-					maks2=gec;
-				}else if(num>maks2&&num<maks&&num<maks1) {
-					num=maks2;
+					int gec1 = maks1;
+					maks1 = gec;
+					maks2 = gec1;
+				} else if (num > maks1 && num < maks) {
+					int gec = maks1;
+					num = maks1;
+					maks2 = gec;
+				} else if (num > maks2 && num < maks && num < maks1) {
+					num = maks2;
 				}
-			count++;
+				count++;
 			}
 		} catch (IOException e) {
 			myObj.createNewFile();
 			System.out.println("File not found. " + e);
 		}
 		do {
-			playerHealth=50;
+			Random random = new Random();
+			int a1 = random.nextInt(5, 26);
+			int a2 = random.nextInt(10, 31);
+			int a3 = random.nextInt(0, 21);
+			int a4 = random.nextInt(15, 36);
+			playerHealth = 50;
 			System.out.println("1. The Game");
 			System.out.println("2. Statistics");
 			System.out.println("3. Exit");
@@ -61,21 +65,29 @@ public class gamblegame {
 			switch (lobby) {
 			case 4:
 				System.out.println("------ACHIEVEMENTS------");
-				if(min<0) {
+				if (min < 0) {
 					System.out.println("Highest to Smallest___(finish with negative numbers)");
-					System.out.println("***You have done it! You broke the temple into smallest pieces.\n***You became the temple itself. You became anything and everything you could imagine!");
-				}else {
+					System.out.println(
+							"***You have done it! You broke the temple into smallest pieces.\n***You became the temple itself. You became anything and everything you could imagine!");
+				} else {
 					System.out.println("???");
-				}if(count>50) {
+				}
+				if (count > 50) {
 					System.out.println("Gambling Addict___(finish 50 games)");
-				}else {
+				} else {
+					System.out.println("???");
+				}
+				if (gamtedb.equals("true")) {
+					System.out.println("Unfaithful Alliance___(reject the gambler teddy bear)");
+				} else {
 					System.out.println("???");
 				}
 			case 3:
 				replay = "no";
 				break;
 			case 2:
-				System.out.println("maximum score is: " + maks+"\nsecond maximum score is:"+maks1+"\nthird maximum score is: "+maks2);
+				System.out.println("maximum score is: " + maks + "\nsecond maximum score is:" + maks1
+						+ "\nthird maximum score is: " + maks2);
 				break;
 			case 1:
 				System.out.println("\n=== LEVEL 1: THE HALL OF CHOICES ===");
@@ -153,7 +165,8 @@ public class gamblegame {
 				System.out.println("You reach a massive chamber covers with leaves.");
 				System.out.println("The Spectral Guardian appears: 'Solve my sequence to cross!'");
 				System.out.println("The bridge reveals this pattern: 1, 4, 9, 16, 25, 36");
-				System.out.print("The Guardian asks: What are the next TWO numbers in this sequence? Enter them seperated by a space: ");
+				System.out.print(
+						"The Guardian asks: What are the next TWO numbers in this sequence? Enter them seperated by a space: ");
 				int predict = input.nextInt();
 				int pre = input.nextInt();
 				if (predict == 49 && pre == 64) {
@@ -230,15 +243,17 @@ public class gamblegame {
 				} else {
 					System.out.println("You have died, Rest In Peace");
 					System.out.println("If you want to hug Gambler Teddy Bear just write 1: ");
-					if(input.nextInt()==1) {
+					if (input.nextInt() == 1) {
 						run();
+					} else {
+						System.out.println("Well, your choice.");
 					}
-					else {
-						System.out.println("Well, your choice.");}
+					gamtedbear = "true";
 				}
-				Date time=new Date();
+				Date time = new Date();
 				try (FileWriter writer = new FileWriter("Score.txt", true)) {
-					writer.write(playerHealth + " is your escape health! You escaped at "+time+"\n");
+					writer.write(playerHealth + " is your escape health! You escaped at " + time + "\n");
+					writer.write(gamtedbear + "\n");
 				} catch (IOException e) {
 					e.printStackTrace();
 					break;
@@ -248,20 +263,21 @@ public class gamblegame {
 			replay = input.next();
 		} while (replay.equals("yes"));
 	}
-	
+
 	public static int alici(Scanner input) {
 		int donut = input.nextInt();
-		while(donut!=1&&donut!=2&&donut!=3&&donut!=4) {
+		while (donut != 1 && donut != 2 && donut != 3 && donut != 4) {
 			System.out.println("You can only write 1, 2 or 3. Try again. ");
 			donut = input.nextInt();
 		}
 		return donut;
 	}
+
 	public static void run() {
-		    System.out.println(" ()_() ");
-		    System.out.println(" _(\")_ ");
-		    System.out.println("(_   _)");
-			System.out.println(" / ' \\ ");
-			System.out.println("(_/ \\_)");
+		System.out.println(" ()_() ");
+		System.out.println(" _(\")_ ");
+		System.out.println("(_   _)");
+		System.out.println(" / ' \\ ");
+		System.out.println("(_/ \\_)");
 	}
 }
