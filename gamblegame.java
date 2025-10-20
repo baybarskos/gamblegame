@@ -21,12 +21,28 @@ public class gamblegame {
 		int count = 0;
 		String gamtedbear = "false";
 		String gamtedb = "";
+		boolean one=false,two=false,three=false,four=false,five=false,six=false,seven=false;
 		try {
 			Scanner file = new Scanner(new FileInputStream(myObj));
 			while (file.hasNextLine()) {
 				int num = file.nextInt();
 				String trash = file.nextLine();
 				gamtedb = file.nextLine();
+				if (num==1) {
+					one=true;
+				}else if(num<40&&num>1) {
+					two=true;
+				}else if(num<100&&num>=40) {
+					three=true;
+				}else if(num<200&&num>=100) {
+					four=true;
+				}else if(num<1000&&num>=200) {
+					five=true;
+				}else if(num<19230&&num>=1000) {
+					six=true;
+				}else if(num>=19230) {
+					seven=true;
+				}
 				if (num < min) {
 					min = num;
 				} else {
@@ -80,6 +96,34 @@ public class gamblegame {
 				if (gamtedb.equals("true")) {
 					System.out.println("Unfaithful Alliance___(reject the gambler teddy bear)");
 				} else {
+					System.out.println("???");
+				}if(one==true) {
+					System.out.println("Postmortal___(win with 1 health)");
+				}else {
+					System.out.println("???");
+				}if(two==true) {
+					System.out.println("Getting Started___(win with maksimum 40 health)");
+				}else {
+					System.out.println("???");
+				}if(three==true) {
+					System.out.println("Flying Start___(win with health between 100 and 40)");
+				}else {
+					System.out.println("???");
+				}if(four==true) {
+					System.out.println("Three Digit King___(win with health between 200 and 100)");
+				}else {
+					System.out.println("???");
+				}if(five==true) {
+					System.out.println("Getting Used To___(win with health between 1000 and 200)");
+				}else {
+					System.out.println("???");
+				}if(six==true) {
+					System.out.println("Into The Endgame___(win with health between 19320 and 1000)");
+				}else {
+					System.out.println("???");
+				}if(seven==true) {
+					System.out.println("The End?___(win with more than 19320 health)");
+				}else {
 					System.out.println("???");
 				}
 			case 3:
@@ -230,9 +274,9 @@ public class gamblegame {
 				} else if (playerHealth >= 1000) {
 					System.out.println(
 							"The guardian of the temple bowing at you with honor, you are now the master of all temples in the three state area!");
-				} else if (playerHealth >= 150) {
+				} else if (playerHealth >= 200) {
 					System.out.println("You now own the temple and all the belongings of the temple, Master!");
-				} else if (playerHealth >= 75) {
+				} else if (playerHealth >= 100) {
 					System.out.println("You are a master explorer! You escape the temple unscathed.");
 				} else if (playerHealth >= 40) {
 					System.out.println("Bruised but triumphant, you escape with the artifact.");
