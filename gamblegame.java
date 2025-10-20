@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 public class gamblegame {
 	public static void main(String[] args) throws IOException {
 		int playerHealth = 50;
@@ -215,7 +216,7 @@ public class gamblegame {
 					else {
 						System.out.println("Well, your choice.");}
 				}
-				LocalDateTime time=LocalDateTime.now();
+				Date time=new Date();
 				try (FileWriter writer = new FileWriter("Score.txt", true)) {
 					writer.write(playerHealth + " is your escape health! You escaped at "+time+"\n");
 				} catch (IOException e) {
